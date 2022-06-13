@@ -3,20 +3,30 @@ package com.techelevator.view;
 import java.util.Scanner;
 
 public class Money {
-    public int balance = 0;
+    public static double balance = 0;
     private static int currentMoneyProvided = 0;
 
-    public int feedMoney(int amount){
+    public static void feedMoney(){
         Scanner input = new Scanner(System.in);
         System.out.println("Please insert $1, $2, $5, or $10.");
+
         String bills = input.nextLine();
         int userInteger = Integer.parseInt(bills);
         System.out.println(userInteger);
 
-        balance = balance + amount;
-        currentMoneyProvided = amount;
+        //TODO: to check negative scenarios
+//        if (userInteger != 1 || userInteger != 2 || userInteger != 5 || userInteger != 10){
+//            System.out.println("Only bills accepted: $1, $2, $5, $10");
+//            String bills1 = input.nextLine();
+//            int userInteger1 = Integer.parseInt(bills);
+//            System.out.println(userInteger);
+//        }
+//        else {
+            balance = balance + userInteger;
+            currentMoneyProvided = userInteger;
+//        }
 
-        return balance;
+//        return balance;
     }
 
     public static int getCurrentMoneyProvided() {

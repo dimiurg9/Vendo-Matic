@@ -23,18 +23,26 @@ public class VendingMachineCLI {
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				// display vending machine items
 				VendingActions.displayMenu();
-			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-				VendingActions.purchaces();
-				// do purchase
-			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)){
-				// Exit program
 			}
+			if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
+				// do purchase
+				VendingActions.purchaces();
+
+			}
+			if (choice.equals(MAIN_MENU_OPTION_EXIT)){
+				// Exit program
+				System.out.println("See you next time!");
+				System.exit(0);
+			}
+
 		}
+
 	}
 
 	public static void main(String[] args) {
 		Menu menu = new Menu(System.in, System.out);
 		VendingMachineCLI cli = new VendingMachineCLI(menu);
 		cli.run();
+
 	}
 }
