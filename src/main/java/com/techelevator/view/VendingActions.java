@@ -6,10 +6,18 @@ import java.util.*;
 
 public class VendingActions {
     static Map<String, Double> itemPrices = new HashMap<>();
+    static Map<String, Double> purchasesHappened = new HashMap<>();
 
     public static void displayMenu(){
-//      String filepath = "C:\\Users\\Admin\\OneDrive\\Desktop\\Merit\\Pair Programming\\Capstone 1\\capstone-1\\vendingmachine.csv";
-        String filepath = "/Users/dzmitry/merit_repos/capstone1/capstone-1/vendingmachine.csv";
+        String os = System.getProperty("os.name").toLowerCase();
+        String filepath = "";
+        if (os.equals("mac os x")){
+            filepath = "/Users/dzmitry/merit_repos/capstone1/capstone-1/vendingmachine.csv";
+        }
+        else{
+            filepath = "C:\\Users\\Admin\\OneDrive\\Desktop\\Merit\\Pair Programming\\Capstone 1\\capstone-1\\vendingmachine.csv";
+        }
+
         File dataFile = new File(filepath);
         List<String> itemsCsv = new ArrayList<>();
 //        Map<String, Double> itemPrices = new HashMap<>();
@@ -33,9 +41,11 @@ public class VendingActions {
 
         }
 
-
     }
+
+
     public static void purchaces(){
+        int purchasesCount = 5;
 //        System.out.println("Your ballance: " + Money.balance);
         System.out.println("(1) Feed Money");
         System.out.println("(2) Select Product");
@@ -59,26 +69,21 @@ public class VendingActions {
             displayMenu();
             System.out.println("Please select your item code: ");
             String choise = input.nextLine();
-            //after purchase
-//            remove -1 items from inventory
-//            display in items availalbe -1
-//
+
             for (Map.Entry<String, Double> priceList : itemPrices.entrySet()){
-                if (choise.equals(priceList.getKey())  ){
-                    System.out.println(priceList.getKey());
+//                TODO: use contaiskey to trobuleshoot if user enter non existing key
+                if (priceList.getKey().equals(choise)){
                     if (priceList.getValue()<= Money.getBalance()){
-//                        System.out.println(priceList.getKey());
                         Money.setBalance(Money.getBalance() - priceList.getValue());
-                        System.out.println("balance in loop: " + Money.getBalance());
+                        System.out.println("you made a purchase of: "+ priceList.getKey());
+                        System.out.println("It cost you: " + priceList.getValue());
+                        System.out.println("balance letf: " + Money.getBalance());
+                        purchasesCount--;
                     }
                     else {
                         System.out.println("not enough money");
-                        displayMenu();
+                        purchaces();
                     }
-                }else {
-                    System.out.println("wrong item code"+ priceList.getKey());
-
-                    purchaces();
                 }
 
             }
@@ -86,6 +91,7 @@ public class VendingActions {
         }
         if (userInteger == 3){
             //
+
         }
 
 
