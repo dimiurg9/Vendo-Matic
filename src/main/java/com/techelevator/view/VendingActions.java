@@ -27,7 +27,7 @@ public class VendingActions {
         }
         for(String item: itemsCsv){
             String[] items = item.split("\\|");
-            System.out.println(items[0] + " " + items[1] + " , Available:" );
+            System.out.println(items[0] + " " + items[1] + " price: " + items[2]+" Available:" );
             double price = Double.parseDouble(items[2]);
             itemPrices.put(items[0], price);
 
@@ -41,7 +41,7 @@ public class VendingActions {
         System.out.println("(2) Select Product");
         System.out.println("(3) Finish Transaction");
         System.out.println("");
-        System.out.println("Current Money Provided: " + Money.getCurrentMoneyProvided());
+//        System.out.println("Current Money Provided: " + Money.getCurrentMoneyProvided());
 
         Scanner input = new Scanner(System.in);
         System.out.println("What you want to do? ");
@@ -55,7 +55,7 @@ public class VendingActions {
             purchaces();
         }
         if (userInteger == 2){
-            System.out.println("balance: " + Money.balance);
+            System.out.println("Current balance: " + Money.getBalance());
             displayMenu();
             System.out.println("Please select your item code: ");
             String choise = input.nextLine();
@@ -64,15 +64,21 @@ public class VendingActions {
 //            display in items availalbe -1
 //
             for (Map.Entry<String, Double> priceList : itemPrices.entrySet()){
-                if (choise == priceList.getKey()){
-                    if (priceList.getValue()<= Money.balance){
-                        Money.balance = Money.balance - priceList.getValue();
-                        System.out.println("balance in loop: " + Money.balance);
+                if (choise.equals(priceList.getKey())  ){
+                    System.out.println(priceList.getKey());
+                    if (priceList.getValue()<= Money.getBalance()){
+//                        System.out.println(priceList.getKey());
+                        Money.setBalance(Money.getBalance() - priceList.getValue());
+                        System.out.println("balance in loop: " + Money.getBalance());
                     }
                     else {
                         System.out.println("not enough money");
                         displayMenu();
                     }
+                }else {
+                    System.out.println("wrong item code"+ priceList.getKey());
+
+                    purchaces();
                 }
 
             }

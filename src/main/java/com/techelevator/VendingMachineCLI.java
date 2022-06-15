@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import com.techelevator.view.Menu;
+import com.techelevator.view.Money;
 import com.techelevator.view.VendingActions;
 
 public class VendingMachineCLI {
