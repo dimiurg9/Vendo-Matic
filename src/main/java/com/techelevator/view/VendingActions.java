@@ -1,5 +1,7 @@
 package com.techelevator.view;
 
+import com.techelevator.VendingMachineCLI;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -7,6 +9,7 @@ import java.util.*;
 public class VendingActions {
     static Map<String, Double> itemPrices = new HashMap<>();
     static Map<String, Integer> purchasesHappened = new HashMap<>();
+
 
     public static void displayMenu(){
         String os = System.getProperty("os.name").toLowerCase();
@@ -35,10 +38,18 @@ public class VendingActions {
         }
         for(String item: itemsCsv){
             String[] items = item.split("\\|");
-            System.out.println(items[0] + " " + items[1] + " price: " + items[2]+" Available:" );
+            if (purchasesHappened.get(items[0]) == null){
+                purchasesHappened.put(items[0], 5);
+            }
+            if (purchasesHappened.get(items[0]) == 0){
+                System.out.println(items[0] + " " + items[1] + " price: " + items[2]+ " SOLD OUT" );
+            }else {
+                System.out.println(items[0] + " " + items[1] + " price: " + items[2]+" Available: "+ purchasesHappened.get(items[0] ));
+            }
             double price = Double.parseDouble(items[2]);
             itemPrices.put(items[0], price);
-            purchasesHappened.put(items[0], 5);
+
+
         }
 
     }
@@ -79,24 +90,36 @@ public class VendingActions {
                 if (priceList.getKey().equals(choise)){
                     if (priceList.getValue()<= Money.getBalance()){
                         Money.setBalance(Money.getBalance() - priceList.getValue());
+//                        TODO: you maid a purchase of <product name> not D4
+                        if (purchasesHappened.get(priceList.getKey()) == 0){
+                            System.out.println("ITEM OUT OF STOCK");
+                            purchaces();
+                        }
                         System.out.println("you made a purchase of: "+ priceList.getKey());
                         System.out.println("It cost you: " + priceList.getValue());
                         System.out.println("balance letf: " + Money.getBalance());
-                        purchasesCount--;
-                        inventoryCount(priceList.getKey(), purchasesCount);
-                        System.out.println();
+
+                        purchasesCount = purchasesHappened.get(priceList.getKey()) - 1;
+                        inventoryCount(priceList.getKey(), (Integer) purchasesCount);
+
+
+
                     }
                     else {
                         System.out.println("not enough money");
                         purchaces();
                     }
+
                 }
 
             }
 
         }
         if (userInteger == 3){
-            //
+//TODO: printl change money is returned using nickels, dimes, and quarters (using the smallest amount of coins possible)
+            System.out.println("Your change: " + Money.getBalance());
+            Money.setBalance(0.0);
+            VendingMachineCLI.run();
 
         }
 
