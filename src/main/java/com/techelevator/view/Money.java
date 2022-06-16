@@ -34,6 +34,7 @@ public class Money {
             }
         } catch (NumberFormatException e) {
             System.out.println("Enter number 1, 2, 5, or 10");
+            VendingActions.purchaces();
         }
     }
 
