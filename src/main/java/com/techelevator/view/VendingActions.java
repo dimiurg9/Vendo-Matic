@@ -6,7 +6,7 @@ import java.util.*;
 
 public class VendingActions {
     static Map<String, Double> itemPrices = new HashMap<>();
-    static Map<String, Double> purchasesHappened = new HashMap<>();
+    static Map<String, Integer> purchasesHappened = new HashMap<>();
 
     public static void displayMenu(){
         String os = System.getProperty("os.name").toLowerCase();
@@ -14,8 +14,8 @@ public class VendingActions {
         if (os.equals("mac os x")){
             filepath = "/Users/dzmitry/merit_repos/capstone1/capstone-1/vendingmachine.csv";
         }
-        else{
-            filepath = "C:\\Users\\Admin\\OneDrive\\Desktop\\Merit\\Pair Programming\\Capstone 1\\capstone-1\\vendingmachine.csv";
+        if (os.equals("windows 11")){
+            filepath = "C:\\Users\\Admin\\OneDrive\\Desktop\\Merit\\Pair Programming\\Capstone 1\\capstone-1\\capstone-1\\vendingmachine.csv";
         }
 
         File dataFile = new File(filepath);
@@ -38,10 +38,14 @@ public class VendingActions {
             System.out.println(items[0] + " " + items[1] + " price: " + items[2]+" Available:" );
             double price = Double.parseDouble(items[2]);
             itemPrices.put(items[0], price);
-
+            purchasesHappened.put(items[0], 5);
         }
 
     }
+   public static void inventoryCount(String key, Integer count){
+        purchasesHappened.put(key, count);
+
+       }
 
 
     public static void purchaces(){
@@ -79,6 +83,8 @@ public class VendingActions {
                         System.out.println("It cost you: " + priceList.getValue());
                         System.out.println("balance letf: " + Money.getBalance());
                         purchasesCount--;
+                        inventoryCount(priceList.getKey(), purchasesCount);
+                        System.out.println();
                     }
                     else {
                         System.out.println("not enough money");
