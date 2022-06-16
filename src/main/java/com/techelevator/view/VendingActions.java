@@ -30,7 +30,6 @@ public class VendingActions {
 
             while(dataInput.hasNextLine()) {
                 String lineOfInput = dataInput.nextLine();
-            //    System.out.println(lineOfInput);
                 itemsCsv.add(lineOfInput);
             }
         } catch (FileNotFoundException e) {
@@ -48,8 +47,6 @@ public class VendingActions {
             }
             double price = Double.parseDouble(items[2]);
             itemPrices.put(items[0], price);
-
-
         }
 
     }
@@ -57,7 +54,6 @@ public class VendingActions {
         purchasesHappened.put(key, count);
 
        }
-
 
     public static void purchaces(){
         int purchasesCount = 5;
@@ -86,30 +82,36 @@ public class VendingActions {
             String choise = input.nextLine();
 
             for (Map.Entry<String, Double> priceList : itemPrices.entrySet()){
-//                TODO: use contaiskey to trobuleshoot if user enter non existing key
                 if (priceList.getKey().equals(choise)){
                     if (priceList.getValue()<= Money.getBalance()){
                         Money.setBalance(Money.getBalance() - priceList.getValue());
-//                        TODO: you maid a purchase of <product name> not D4
                         if (purchasesHappened.get(priceList.getKey()) == 0){
                             System.out.println("ITEM OUT OF STOCK");
                             purchaces();
                         }
+                        //TODO: you maid a purchase of <product name> not D4
                         System.out.println("you made a purchase of: "+ priceList.getKey());
                         System.out.println("It cost you: " + priceList.getValue());
                         System.out.println("balance letf: " + Money.getBalance());
 
                         purchasesCount = purchasesHappened.get(priceList.getKey()) - 1;
                         inventoryCount(priceList.getKey(), (Integer) purchasesCount);
-
-
-
+/* TODO Dispensing also returns a message:
+All chip items print "Crunch Crunch, Yum!"
+All candy items print "Munch Munch, Yum!"
+All drink items print "Glug Glug, Yum!"
+All gum items print "Chew Chew, Yum!"
+ */
                     }
                     else {
                         System.out.println("not enough money");
                         purchaces();
                     }
 
+                }
+                else {
+                    System.out.println("Item does not exists");
+                    purchaces();
                 }
 
             }
