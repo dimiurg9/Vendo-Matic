@@ -41,9 +41,11 @@ public class VendingActions {
         }
         for(String item: itemsCsv){
             String[] items = item.split("\\|");
-//            TODO Array[] within map. how to access Array elements
+
+//            TODO refactor the code with Map<String, String[]>
 //            menuItems.put(items[0], items);
-//            System.out.println("xxxx" + menuItems.get("D4")[1]);
+//            System.out.println("xxxx" + (menuItems.get(items[0]))[3]);
+
             itemType.put(items[0], items[3]);
             itemName.put(items[0], items[1]);
 
