@@ -66,11 +66,14 @@ public class VendingActions {
         System.out.println("");
 //        System.out.println("Current Money Provided: " + Money.getCurrentMoneyProvided());
 
-        Scanner input = new Scanner(System.in);
-        System.out.println("What you want to do? ");
+        try{
+            Scanner input = new Scanner(System.in);
+            System.out.println("What you want to do? ");
 
-        String action = input.nextLine();
-        int userInteger = Integer.parseInt(action);
+            String action = input.nextLine();
+            int userInteger = Integer.parseInt(action);
+
+
 //         TODO: negative scenarios
 //        System.out.println(userInteger);
         if (userInteger == 1){
@@ -117,9 +120,14 @@ public class VendingActions {
             VendingMachineCLI.run();
 
         }
+        } catch(NumberFormatException e){
+            System.out.println("Please enter 1, 2, or 3.");
+
+        }
 
 
 
     }
+
 
 }
