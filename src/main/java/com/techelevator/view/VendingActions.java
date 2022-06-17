@@ -7,8 +7,11 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class VendingActions {
+//    static HashMap<String, String[]> menuItems = new HashMap<>();
     static Map<String, Double> itemPrices = new HashMap<>();
     static Map<String, Integer> purchasesHappened = new HashMap<>();
+    static Map<String, String> itemType = new HashMap<>();
+    static Map<String, String> itemName = new HashMap<>();
 
 
     public static void displayMenu(){
@@ -38,6 +41,12 @@ public class VendingActions {
         }
         for(String item: itemsCsv){
             String[] items = item.split("\\|");
+//            TODO Array[] within map. how to access Array elements
+//            menuItems.put(items[0], items);
+//            System.out.println("xxxx" + menuItems.get("D4")[1]);
+            itemType.put(items[0], items[3]);
+            itemName.put(items[0], items[1]);
+
             if (purchasesHappened.get(items[0]) == null){
                 purchasesHappened.put(items[0], 5);
             }
@@ -48,6 +57,7 @@ public class VendingActions {
             }
             double price = Double.parseDouble(items[2]);
             itemPrices.put(items[0], price);
+            itemType.put(items[0], items[3]);
         }
 
     }
@@ -96,12 +106,16 @@ public class VendingActions {
                             purchaces();
                         }
                         //TODO: you maid a purchase of <product name> not D4
-                        System.out.println("you made a purchase of: "+ priceList.getKey());
+                        System.out.println("you made a purchase of: "+ itemName.get(priceList.getKey()));
                         System.out.println("It cost you: " + priceList.getValue());
                         System.out.println("balance letf: " + Money.getBalance());
 
+
                         purchasesCount = purchasesHappened.get(priceList.getKey()) - 1;
                         inventoryCount(priceList.getKey(), (Integer) purchasesCount);
+//                        if (itemType.get(priceList.getKey()) == "chip"){
+//                            System.out.println("Crunch Crunch, Yum!");
+//                        }
                     }
                     else {
                         System.out.println("not enough money");
