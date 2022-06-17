@@ -1,13 +1,15 @@
 package com.techelevator.view;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
+
 
 public class Money {
     public static double balance;
     private static int currentMoneyProvided;
 
     public static double getBalance() {
-        return balance;
+        return Double.parseDouble(new DecimalFormat("##.##").format(balance));
     }
 
     public static void setBalance(double balance) {

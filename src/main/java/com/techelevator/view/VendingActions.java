@@ -53,9 +53,11 @@ public class VendingActions {
                 purchasesHappened.put(items[0], 5);
             }
             if (purchasesHappened.get(items[0]) == 0){
-                System.out.println(items[0] + " " + items[1] + " price: " + items[2]+ " SOLD OUT" );
+                System.out.println(String.format( "%s %-20s price: %s SOLD OUT", items[0],items[1],items[2]));
+//                System.out.println(items[0] + " " + items[1] + " price: " + items[2]+ " SOLD OUT" );
             }else {
-                System.out.println(items[0] + " " + items[1] + " price: " + items[2]+" Available: "+ purchasesHappened.get(items[0] ));
+                System.out.println(String.format( "%s %-20s price: %s Available: %s", items[0],items[1],items[2], purchasesHappened.get(items[0] )   ));
+//                System.out.println(items[0] + " " + items[1] + " price: " + items[2]+" Available: "+ purchasesHappened.get(items[0] ));
             }
             double price = Double.parseDouble(items[2]);
             itemPrices.put(items[0], price);
@@ -88,6 +90,7 @@ public class VendingActions {
 
 //         TODO: negative scenarios
 //        System.out.println(userInteger);
+
         if (userInteger == 1){
             Money.feedMoney();
             purchaces();
@@ -107,17 +110,31 @@ public class VendingActions {
                             System.out.println("ITEM OUT OF STOCK");
                             purchaces();
                         }
+                        System.out.println("######################");
                         //TODO: you maid a purchase of <product name> not D4
                         System.out.println("you made a purchase of: "+ itemName.get(priceList.getKey()));
                         System.out.println("It cost you: " + priceList.getValue());
                         System.out.println("balance letf: " + Money.getBalance());
 
 
+
                         purchasesCount = purchasesHappened.get(priceList.getKey()) - 1;
                         inventoryCount(priceList.getKey(), (Integer) purchasesCount);
-//                        if (itemType.get(priceList.getKey()) == "chip"){
-//                            System.out.println("Crunch Crunch, Yum!");
-//                        }
+                        System.out.println("######################");
+                        if (itemType.get(priceList.getKey()).equals("Chip")){
+                            System.out.println("Crunch Crunch, Yum!");
+                        }
+                        if (itemType.get(priceList.getKey()).equals("Candy")){
+                            System.out.println("Munch Munch, Yum");
+                        }
+                        if (itemType.get(priceList.getKey()).equals("Drink")){
+                            System.out.println("Glug Glug, Yum!");
+                        }
+                        if (itemType.get(priceList.getKey()).equals("Gum")){
+                            System.out.println("Chew Chew, Yum!");
+                        }
+                        System.out.println("######################");
+
                     }
                     else {
                         System.out.println("not enough money");
@@ -136,6 +153,8 @@ public class VendingActions {
             VendingMachineCLI.run();
 
         }
+
+
         } catch(NumberFormatException e){
             System.out.println("Please enter 1, 2, or 3.");
 
