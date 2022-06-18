@@ -34,6 +34,8 @@ public class Money {
                 System.out.println("Only bills accepted: $1, $2, $5, $10");
 
             }
+            String passToLog = ("FEED MONEY: $" + Money.getCurrentMoneyProvided()+ " $" + Money.getBalance()  );
+            LogWriter.log(passToLog);
         } catch (NumberFormatException e) {
             System.out.println("Enter number 1, 2, 5, or 10");
             VendingActions.purchaces();

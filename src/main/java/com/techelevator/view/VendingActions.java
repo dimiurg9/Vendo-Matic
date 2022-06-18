@@ -133,7 +133,9 @@ public class VendingActions {
                             System.out.println("Chew Chew, Yum!");
                         }
                         System.out.println("######################");
-                        String passToLog = (itemName.get(priceList.getKey() + " " + priceList.getKey()  + " " + Money.getBalance() + " " + (Money.getBalance() + priceList.getValue())));
+                        String passToLog = (itemName.get(priceList.getKey()) + " "+ priceList.getKey() +" $"
+                                + (Money.getBalance() + priceList.getValue())
+                                + " " + Money.getBalance());
                         LogWriter.log(passToLog);
                     }
                     else {
@@ -163,7 +165,8 @@ public class VendingActions {
 
             System.out.println("Your change: " + Money.getBalance()  );
             System.out.println("Quarters:" + quarters +" Dimes:" + dimes + " Nickles:" + nickles);
-
+            String passToLog = ("GIVE CHANGE: $"+ Money.getBalance() + " $0.00");
+            LogWriter.log(passToLog);
             Money.setBalance(0.0);
             VendingMachineCLI.run();
 

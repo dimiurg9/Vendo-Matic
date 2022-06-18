@@ -1,5 +1,4 @@
-blahblahblah
-blahblahblah1111
-Fri Jun 17 19:40:12 CDT 2022 blahblahblah1111
-Fri Jun 17 19:54:24 CDT 2022 null
-Fri Jun 17 19:58:50 CDT 2022 null
+
+Fri Jun 17 18:18:12 PDT 2022 FEED MONEY: $0 $0.0
+Fri Jun 17 18:18:18 PDT 2022 FEED MONEY: $5 $5.0
+Fri Jun 17 18:18:24 PDT 2022 Triplemint D4 $5.0 4.25
