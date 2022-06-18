@@ -27,7 +27,6 @@ public class LogWriter {
 
                 dataOutputAppending.println(date.toString() + " " + message);
             } catch (FileNotFoundException e) {
-//            e.printStackTrace();
                 System.err.println("Cannot open file for writing");
                 System.exit(1);
             }

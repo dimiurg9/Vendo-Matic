@@ -1,7 +1,6 @@
 package com.techelevator;
 
 import com.techelevator.view.Menu;
-import com.techelevator.view.Money;
 import com.techelevator.view.VendingActions;
 
 public class VendingMachineCLI {
@@ -17,7 +16,7 @@ public class VendingMachineCLI {
 		this.menu = menu;
 	}
 
-	public static void run() {
+	public static Object run() {
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 

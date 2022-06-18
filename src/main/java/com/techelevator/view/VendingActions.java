@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class VendingActions {
-//    static HashMap<String, String[]> menuItems = new HashMap<>();
+    //    static HashMap<String, String[]> menuItems = new HashMap<>();
     static Map<String, Double> itemPrices = new HashMap<>();
     static Map<String, Integer> purchasesHappened = new HashMap<>();
     static Map<String, String> itemType = new HashMap<>();
@@ -26,14 +26,12 @@ public class VendingActions {
 
         File dataFile = new File(filepath);
         List<String> itemsCsv = new ArrayList<>();
-//        Map<String, Double> itemPrices = new HashMap<>();
 
         try {
             Scanner dataInput = new Scanner(dataFile);
 
             while(dataInput.hasNextLine()) {
                 String lineOfInput = dataInput.nextLine();
-            //    System.out.println(lineOfInput);
                 itemsCsv.add(lineOfInput);
             }
         } catch (FileNotFoundException e) {
@@ -44,7 +42,7 @@ public class VendingActions {
 
 //            TODO refactor the code with Map<String, String[]>
 //            menuItems.put(items[0], items);
-//            System.out.println("xxxx" + (menuItems.get(items[0]))[3]);
+//            System.out.println((menuItems.get(items[0]))[3]);
 
             itemType.put(items[0], items[3]);
             itemName.put(items[0], items[1]);
@@ -54,10 +52,9 @@ public class VendingActions {
             }
             if (purchasesHappened.get(items[0]) == 0){
                 System.out.println(String.format( "%s %-20s price: %s SOLD OUT", items[0],items[1],items[2]));
-//                System.out.println(items[0] + " " + items[1] + " price: " + items[2]+ " SOLD OUT" );
             }else {
                 System.out.println(String.format( "%s %-20s price: %s Available: %s", items[0],items[1],items[2], purchasesHappened.get(items[0] )   ));
-//                System.out.println(items[0] + " " + items[1] + " price: " + items[2]+" Available: "+ purchasesHappened.get(items[0] ));
+
             }
             double price = Double.parseDouble(items[2]);
             itemPrices.put(items[0], price);
@@ -71,9 +68,8 @@ public class VendingActions {
        }
 
 
-    public static void purchaces(){
+    public static Object purchaces(){
         int purchasesCount = 5;
-//        System.out.println("Your ballance: " + Money.balance);
         System.out.println("(1) Feed Money");
         System.out.println("(2) Select Product");
         System.out.println("(3) Finish Transaction");
@@ -86,9 +82,6 @@ public class VendingActions {
 
             String action = input.nextLine();
             int userInteger = Integer.parseInt(action);
-
-
-//        System.out.println(userInteger);
 
         if (userInteger == 1){
             Money.feedMoney();
@@ -179,7 +172,7 @@ public class VendingActions {
         }
 
 
-
+        return null;
     }
 
 
