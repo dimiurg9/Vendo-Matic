@@ -77,8 +77,8 @@ public class VendingActions {
         System.out.println("(1) Feed Money");
         System.out.println("(2) Select Product");
         System.out.println("(3) Finish Transaction");
-        System.out.println("");
-//        System.out.println("Current Money Provided: " + Money.getCurrentMoneyProvided());
+        System.out.println();
+        System.out.println("Current Money Provided: " + Money.getCurrentMoneyProvided());
 
         try{
             Scanner input = new Scanner(System.in);
@@ -88,7 +88,6 @@ public class VendingActions {
             int userInteger = Integer.parseInt(action);
 
 
-//         TODO: negative scenarios
 //        System.out.println(userInteger);
 
         if (userInteger == 1){
@@ -114,12 +113,12 @@ public class VendingActions {
                         //TODO: you maid a purchase of <product name> not D4
                         System.out.println("you made a purchase of: "+ itemName.get(priceList.getKey()));
                         System.out.println("It cost you: " + priceList.getValue());
-                        System.out.println("balance letf: " + Money.getBalance());
+                        System.out.println("balance left: " + Money.getBalance());
 
 
 
                         purchasesCount = purchasesHappened.get(priceList.getKey()) - 1;
-                        inventoryCount(priceList.getKey(), (Integer) purchasesCount);
+                        inventoryCount(priceList.getKey(), purchasesCount);
                         System.out.println("######################");
                         if (itemType.get(priceList.getKey()).equals("Chip")){
                             System.out.println("Crunch Crunch, Yum!");
@@ -134,7 +133,8 @@ public class VendingActions {
                             System.out.println("Chew Chew, Yum!");
                         }
                         System.out.println("######################");
-
+                        String passToLog = (itemName.get(priceList.getKey() + " " + priceList.getKey()  + " " + Money.getBalance() + " " + (Money.getBalance() + priceList.getValue())));
+                        LogWriter.log(passToLog);
                     }
                     else {
                         System.out.println("not enough money");
@@ -147,8 +147,23 @@ public class VendingActions {
 
         }
         if (userInteger == 3){
-//TODO: printl change money is returned using nickels, dimes, and quarters (using the smallest amount of coins possible)
-            System.out.println("Your change: " + Money.getBalance());
+           int quarters;
+           int dimes;
+           int nickles;
+
+            double balanceInCents = Money.getBalance() * 100;
+            double coins = balanceInCents;
+
+            quarters = (int)(balanceInCents/25);
+            coins %= 25;
+            dimes = (int)(coins/10);
+            coins %= 10;
+            nickles = (int)(coins/5);
+
+
+            System.out.println("Your change: " + Money.getBalance()  );
+            System.out.println("Quarters:" + quarters +" Dimes:" + dimes + " Nickles:" + nickles);
+
             Money.setBalance(0.0);
             VendingMachineCLI.run();
 
